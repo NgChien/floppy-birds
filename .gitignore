@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Build files
+/build
+/dist
+.next
+out/
+
+# Cache
+.cache/
+.npm
+.eslintcache
+.vercel
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Hardhat
+/smartcontract/cache
+/smartcontract/artifacts
+/smartcontract/typechain-types
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

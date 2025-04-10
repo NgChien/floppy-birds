@@ -1,0 +1,313 @@
+#splash {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: transparent;
+   z-index: 100;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   cursor: pointer;
+}
+
+#splash .loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+#splash .loading::after {
+   content: "";
+   width: 40px;
+   height: 40px;
+   border: 4px solid #f3f3f3;
+   border-top: 4px solid #3498db;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+}
+
+#splash .success {
+   color: #2ecc71;
+   font-weight: bold;
+   text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+#splash .error {
+   color: #e74c3c;
+   font-weight: bold;
+   text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+
+.transaction-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.8);
+   z-index: 1000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.transaction-modal .modal-content {
+   background: #1a1a1a;
+   padding: 30px;
+   border-radius: 12px;
+   min-width: 300px;
+   text-align: center;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.transaction-modal .loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.transaction-modal .spinner {
+   width: 40px;
+   height: 40px;
+   border: 4px solid #f3f3f3;
+   border-top: 4px solid #3498db;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+}
+
+.transaction-modal .message {
+   color: white;
+   font-size: 18px;
+   font-weight: 500;
+}
+
+.transaction-modal .success {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.transaction-modal .success .icon {
+   width: 50px;
+   height: 50px;
+   background: #2ecc71;
+   border-radius: 50%;
+   position: relative;
+}
+
+.transaction-modal .success .icon::before {
+   content: "";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%) rotate(45deg);
+   width: 12px;
+   height: 20px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+}
+
+.transaction-modal .error {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.transaction-modal .error .icon {
+   width: 50px;
+   height: 50px;
+   background: #e74c3c;
+   border-radius: 50%;
+   position: relative;
+}
+
+.transaction-modal .error .icon::before,
+.transaction-modal .error .icon::after {
+   content: "";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 20px;
+   height: 3px;
+   background: white;
+}
+
+.transaction-modal .error .icon::before {
+   transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.transaction-modal .error .icon::after {
+   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+
+.splash-content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 30px;
+}
+
+.game-title {
+   font-size: 48px;
+   font-weight: bold;
+   color: white;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.playbutton {
+   position: absolute;
+   left: 50%;
+   top: 45%;  /* Adjust to match the bird's position */
+   transform: translate(-50%, -50%);
+   background: rgba(255, 255, 255, 0.8);
+   padding: 10px 20px;
+   border-radius: 10px;
+   cursor: pointer;
+   pointer-events: auto;
+   transition: all 0.3s ease;
+   z-index: 101;
+}
+
+.playbutton:hover {
+   background: rgba(255, 255, 255, 1);
+   transform: translate(-50%, -50%) scale(1.1);
+}
+
+.playbutton img {
+   width: 60px;
+   height: 60px;
+   display: block;
+}
+
+#splash button {
+   pointer-events: auto;
+}
+
+.game-start-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background: rgba(0, 0, 0, 0.8);
+   z-index: 99999;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   pointer-events: all;
+}
+
+.game-start-modal .modal-content {
+   background: rgba(255, 255, 255, 0.95);
+   padding: 30px;
+   border-radius: 15px;
+   text-align: center;
+   min-width: 300px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+   position: relative;
+   z-index: 100000;
+}
+
+.game-start-modal .loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.game-start-modal .spinner {
+   width: 50px;
+   height: 50px;
+   border: 5px solid #f3f3f3;
+   border-top: 5px solid #3498db;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+}
+
+.game-start-modal .message {
+   color: #333;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.game-start-modal .success {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.game-start-modal .play-button {
+   background: rgba(255, 255, 255, 0.9);
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   padding: 10px;
+   transition: all 0.3s ease;
+   pointer-events: all;
+}
+
+.game-start-modal .play-button:hover {
+   transform: scale(1.1);
+   background: rgba(255, 255, 255, 1);
+}
+
+.game-start-modal .play-button img {
+   width: 60px;
+   height: 60px;
+   display: block;
+}
+
+.game-start-modal .error {
+   color: #e74c3c;
+   font-weight: bold;
+   padding: 20px;
+}
+
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+
+.splash-play {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background: rgba(255, 255, 255, 0.9);
+   padding: 10px;
+   border-radius: 10px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   pointer-events: all;
+   z-index: 101;
+   display: block;  /* Show the button */
+}
+
+.splash-play:hover {
+   transform: translate(-50%, -50%) scale(1.1);
+   background: rgba(255, 255, 255, 1);
+}
+
+.splash-play img {
+   width: 45px;
+   height: 45px;
+   display: block;
+} 

@@ -1,0 +1,16 @@
+{
+  "name": "floppy-bird-gamefi",
+  "version": "1.0.0",
+  "description": "Floppy Bird GameFi on Tea Network",
+  "main": "game/index.html",
+  "scripts": {
+    "start": "serve game",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "@vercel/static": "^1.0.0"
+  }
+} 

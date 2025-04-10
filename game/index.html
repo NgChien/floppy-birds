@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Floppy Bird</title>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta name="author" content="Nebez Briefkani" />
+   <meta name="description" content="play floppy bird. a remake of popular game flappy bird built in html/css/js" />
+   <meta name="keywords"
+      content="flappybird,flappy,bird,floppybird,floppy,html,html5,css,css3,js,javascript,jquery,github,nebez,briefkani,nebezb,open,source,opensource" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+   <!-- Open Graph tags -->
+   <meta property="og:title" content="Floppy Bird" />
+   <meta property="og:description"
+      content="play floppy bird. a remake of popular game flappy bird built in html/css/js" />
+   <meta property="og:type" content="website" />
+   <meta property="og:image" content="https://nebezb.com/floppybird/assets/thumb.png" />
+   <meta property="og:url" content="https://nebezb.com/floppybird/" />
+   <meta property="og:site_name" content="Floppy Bird" />
+
+   <!-- Style sheets -->
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/jquery-ui.js">
+   <link href="css/reset.css" rel="stylesheet">
+   <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+   <div id="gamecontainer">
+      <div class="airdrop-banner">
+         🎮 <strong>Play To Airdrop:</strong> Earn FLP tokens now - Will be exchanged 1:1 on Mainnet! 🚀
+      </div>
+      
+      <div class="game-instructions">
+         <h3>🎯 How to Play</h3>
+         <ul>
+            <li>🎟️ <strong>Tickets:</strong> Buy tickets to play (1 TEA = 1 Ticket)</li>
+            <li>🎮 <strong>Controls:</strong> Press SPACE or Click to make the bird fly</li>
+            <li>🎯 <strong>Goal:</strong> Fly through the pipes without hitting them</li>
+            <li>⭐ <strong>Score:</strong> +1 point for each pipe passed</li>
+            <li>💎 <strong>Rewards:</strong> Earn FLP tokens for high scores</li>
+         </ul>
+      </div>
+      
+      <div id="walletConnect" class="connect-button">
+         <span>Connect wallet</span>
+      </div>
+      <div class="wallet-information">
+         <div id="wallet-info"></div>
+      </div>
+
+      <div id="gamescreen">
+         <div id="sky" class="animated">
+            <div id="flyarea">
+               <div id="ceiling" class="animated"></div>
+               <!-- This is the flying and pipe area container -->
+               <div id="player" class="bird animated"></div>
+
+               <div id="bigscore"></div>
+
+               <div id="splash"></div>
+
+               <div id="scoreboard">
+                  <div id="medal"></div>
+                  <div id="currentscore"></div>
+                  <div id="highscore"></div>
+                  <div id="replay"><img src="assets/replay.png" alt="replay"></div>
+               </div>
+
+               <!-- Pipes go here! -->
+            </div>
+         </div>
+         <div id="land" class="animated">
+            <div id="debug"></div>
+         </div>
+      </div>
+
+      <div id="deposit-withdraw">
+         <span class="convert-title">BUY TICKET</span>
+         <div class="row">
+            <span id="label-from">Ticket</span>
+            <input value="0" type="number" id="from-ticket" />
+         </div>
+         <div style="display: flex; justify-content: center;">
+            <img src="./assets/arrow.png" style="width: 25px; cursor: pointer;" id="img-convert" />
+         </div>
+         <div class="row">
+            <span id="label-to">TEA</span>
+            <input value="0" id="to-ticket" type="number" readonly />
+         </div>
+         <div class="row">
+            <span id="processing">please wait...</span>
+            <button id="btn-convert">Buy</button>
+         </div>
+      </div>
+
+      <div id="dialog">
+         <p>
+            Your transactions is completed! 
+         </p>
+         <a href="#" target="_blank" id="a-transactionHash">
+            ******
+        </a>
+      </div>
+
+      <div id="claim-reward-modal" class="claim-reward-modal">
+         <div class="claim-reward-content">
+            <div class="claim-reward-spinner"></div>
+            <div class="claim-reward-message">Đang xử lý nhận thưởng...</div>
+         </div>
+      </div>
+   </div>
+   <div id="footer">
+  
+   </div>
+   <div class="boundingbox" id="playerbox"></div>
+   <div class="boundingbox" id="pipebox"></div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/jquery-ui.min.js"></script>
+   <script src="js/jquery.transit.min.js"></script>
+   <script src="js/buzz.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+   <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.1/dist/umd/index.min.js"></script>
+   <script src="https://unpkg.com/web3modal@1.9.5/dist/index.js"></script>
+
+   <script src="js/web3/api.js"></script>
+   <script src="js/web3/web3Modal.js"></script>
+   <script src="js/main.js"></script>
+
+   <script>
+      // Khởi tạo AudioContext
+      let audioCtx;
+      
+      // Xử lý tương tác người dùng trước khi phát âm thanh
+      function initAudio() {
+         if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+         }
+         if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+         }
+      }
+
+      // Lắng nghe các sự kiện tương tác
+      ['click', 'touchstart', 'keydown'].forEach(event => {
+         document.addEventListener(event, initAudio, { once: true });
+      });
+
+      function inIframe() {
+         try {
+            return window.self !== window.top;
+         } catch (e) {
+            return true;
+         }
+      }
+      if (!inIframe() && window.location.hostname == 'nebezb.com') {
+         window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+         ga('create', 'UA-48047334-1', 'auto');
+         ga('send', 'pageview');
+      }
+   </script>
+   <script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>
+
+</html>

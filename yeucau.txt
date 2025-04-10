@@ -1,0 +1,13 @@
+
+ logic chơi game :
+- người dùng sẽ mua ticker để chơi game . 1 ticker = 1 TEA ( native token) xử lý trong contract Floppy.sol khi người dùng gọi hàm mint ticker sẽ có tham số số ticker muốn mint điền vào 1 ticker = 1 TEA
+- người dùng dùng ticker để chơi game . 1 ticker = 1 lượt chơi ( sẽ có hàm start game) , khi gọi hàm này có nghĩa là người chơi mất 1 ticker để chơi 1 lượt game xử lý trong contract  Floppy.sol
+- bỏ contract Vault
+- khi chơi xong sẽ có 1 hàm nhận phần thưởng . khi call nhận vào 1 tham số là số điểm người chơi thắng cuộc , 1 điểm sẽ nhận được 1000 token Floppy
+
+về phần fontend
+- phần convert thay bằng BUY ticker
+
+
+- có ticker mới được chơi game  
+
